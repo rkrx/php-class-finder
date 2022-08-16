@@ -1,6 +1,6 @@
 # PHP class finder
 
-You have to provide a list of file paths in which a php-class is to be searched for. Behind the scenes, [https://packagist.org/packages/nikic/php-parser](`nikic/php-parser`) is used to interpret the files. This means that the PHP files are not interpreted directly. This is much slower, than the approach, that [https://packagist.org/packages/haydenpierce/class-finder](`haydenpierce/class-finder`) is using.
+You have to provide a list of file paths in which a php-class is to be searched for. Behind the scenes, [`nikic/php-parser`](https://packagist.org/packages/nikic/php-parser) is used to interpret the files. This means that the PHP files are not interpreted directly. This is much slower, than the approach, that [`haydenpierce/class-finder`](https://packagist.org/packages/haydenpierce/class-finder) is using.
 
 `composer require rkr/class-finder`
 
