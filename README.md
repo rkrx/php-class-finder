@@ -4,7 +4,9 @@ You have to provide a list of file paths in which a php-class is to be searched 
 
 `composer require rkr/class-finder`
 
-## Example
+## Examples
+
+### `ClassFinder::findClassesFromDirectory`
 
 ```php
 use Kir\ClassFinder\ClassFinder;
@@ -16,6 +18,8 @@ print_r($classNames);
 // Kir\ClassFinder\NodeVisitor
 // Kir\ClassFinder\ClassFinder
 ```
+
+### `ClassFinder::findClassesFromIterableFileList`
 
 ```php
 use Kir\ClassFinder\ClassFinder;
