@@ -2,6 +2,7 @@
     "name": "rkr/class-finder",
     "description": "A tool to find full qualified class-names from a list of files",
     "type": "library",
+    "license": "MIT",
     "keywords": ["class", "finder"],
     "require": {
         "nikic/php-parser": "^4.14"
