@@ -14,9 +14,12 @@ use Kir\ClassFinder\ClassFinder;
 $startDir = __DIR__ . '/src';
 $classNames = ClassFinder::findClassesFromDirectory($startDir);
 
-print_r($classNames);
+print_r(iterator_to_array($classNames));
 // Kir\ClassFinder\NodeVisitor
 // Kir\ClassFinder\ClassFinder
+// Kir\ClassFinder\ClassTools
+// Kir\ClassFinder\ClassFinderResult
+// Kir\ClassFinder\ClassFile
 ```
 
 ### `ClassFinder::findClassesFromIterableFileList`
@@ -30,10 +33,13 @@ $directory = new RecursiveDirectoryIterator($startDir, FilesystemIterator::FOLLO
 $iterator = new RecursiveIteratorIterator($directory);
 $files = new CallbackFilterIterator($iterator, fn(string $path) => preg_match('{\\.p(hp\\d?|html)$}i', $path));
 //endregion
-		
+
 $classNames = ClassFinder::findClassesFromIterableFileList($files);
 
-print_r($classNames);
+print_r(iterator_to_array($classNames));
 // Kir\ClassFinder\NodeVisitor
 // Kir\ClassFinder\ClassFinder
+// Kir\ClassFinder\ClassTools
+// Kir\ClassFinder\ClassFinderResult
+// Kir\ClassFinder\ClassFile
 ```

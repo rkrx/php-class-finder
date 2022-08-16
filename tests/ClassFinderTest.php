@@ -2,26 +2,22 @@
 
 namespace Kir\ClassFinder;
 
-use CallbackFilterIterator;
-use FilesystemIterator;
 use PHPUnit\Framework\TestCase;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 
 class ClassFinderTest extends TestCase {
 	public function testClassWONamespace(): void {
 		$classNames = ClassFinder::findClassesFromIterableFileList([__DIR__.'/test-files/ClassWONamespace.php']);
-		self::assertEquals(['TextClass1', 'TextClass2'], $classNames);
+		self::assertEquals(['TextClass1', 'TextClass2'], iterator_to_array($classNames));
 	}
 	
 	public function testClassWithOneNamespace(): void {
 		$classNames = ClassFinder::findClassesFromIterableFileList([__DIR__.'/test-files/ClassesWithOneNamespace.php']);
-		self::assertEquals(['Test\\Namespace\\ClassWithOneNamespace', 'Test\\Namespace\\AnotherClassWithOneNamespace'], $classNames);
+		self::assertEquals(['Test\\Namespace\\ClassWithOneNamespace', 'Test\\Namespace\\AnotherClassWithOneNamespace'], iterator_to_array($classNames));
 	}
 	
 	public function testClassWithANestedNamespace(): void {
 		$classNames = ClassFinder::findClassesFromIterableFileList([__DIR__.'/test-files/ClassesWithANestedNamespace.php']);
-		self::assertEquals(['Test\\NestedNamespace\\ClassWithANestedNamespace', 'Test\\NestedNamespace\\AnotherClassWithANestedNamespace'], $classNames);
+		self::assertEquals(['Test\\NestedNamespace\\ClassWithANestedNamespace', 'Test\\NestedNamespace\\AnotherClassWithANestedNamespace'], iterator_to_array($classNames));
 	}
 	
 	public function testMultipleFiles(): void {
@@ -30,15 +26,6 @@ class ClassFinderTest extends TestCase {
 			__DIR__.'/test-files/ClassesWithOneNamespace.php',
 			__DIR__.'/test-files/ClassesWithANestedNamespace.php',
 		]);
-		self::assertCount(6, $classNames);
-	}
-	
-	public function testVendorFolder(): void {
-		$startDir = __DIR__ . '/../vendor/';
-		
-		$classNames = ClassFinder::findClassesFromDirectory($startDir);
-		foreach($classNames as $className) {
-			printf("%s\n", $className);
-		}
+		self::assertCount(6, iterator_to_array($classNames));
 	}
 }
