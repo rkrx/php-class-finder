@@ -3,7 +3,9 @@
 namespace Kir\ClassFinder;
 
 use PhpParser\NodeTraverser;
+use PhpParser\Parser;
 use PhpParser\ParserFactory;
+use PhpParser\PhpVersion;
 use RuntimeException;
 
 class ClassTools {
@@ -26,7 +28,7 @@ class ClassTools {
 	 * @return string[]
 	 */
 	public static function getFQClassNamesFromString(string $source): array {
-		$parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
+		$parser = self::createParser();
 		$ast = $parser->parse($source);
 		
 		if($ast === null) {
@@ -40,5 +42,13 @@ class ClassTools {
 		$traverser->traverse($ast);
 		
 		return $visitor->getClassNames();
+	}
+	
+	private static function createParser(): Parser {
+		$parserFactory = new ParserFactory;
+		if(method_exists($parserFactory, 'create')) { // @phpstan-ignore-line
+			return $parserFactory->create(ParserFactory::PREFER_PHP7); // @phpstan-ignore-line
+		}
+		return $parserFactory->createForVersion(version: PhpVersion::getHostVersion());
 	}
 }
